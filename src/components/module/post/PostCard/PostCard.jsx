@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import pluralize from "pluralize";
+import { formatDistanceToNow } from "date-fns";
 
+import Icon from "components/common/Icon";
 import Image from "components/common/Image";
+
+// import post from "types/post";
 
 import styles from "./postCard.less";
 
@@ -16,6 +21,21 @@ const defaultProps = {
   className: "",
   onClick: () => {},
   post: {},
+};
+
+const renderCreationDateInformation = (creationTimestamp) => {
+  const correctedTimestamp = creationTimestamp * 1000;
+
+  return formatDistanceToNow(correctedTimestamp, {
+    addSuffix: true,
+    includeSeconds: true,
+  });
+};
+
+const renderCommentInformation = (numberOfComments) => {
+  const pluralizedNoun = pluralize("comment", numberOfComments);
+
+  return `${numberOfComments} ${pluralizedNoun}`;
 };
 
 const PostCard = ({
@@ -42,10 +62,10 @@ const PostCard = ({
         </div>
         <div className={styles["author-and-creation-date-wrapper"]}>
           <span>{author}</span>
-          <span>{created}</span>
+          <span>{renderCreationDateInformation(created)}</span>
         </div>
         <div className={styles["number-of-comments-wrapper"]}>
-          <span>{numberOfComments}</span>
+          <span>{renderCommentInformation(numberOfComments)}</span>
         </div>
       </div>
     </div>

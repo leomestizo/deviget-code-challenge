@@ -6,6 +6,18 @@
   color: #323232;
 }
 
+.button-container {
+  display: flex;
+}
+
+.button {
+  flex: 1;
+
+  &:not(:last-child) {
+    border-right: 1px solid #ccc;
+  }
+}
+
 .loader-container {
   height: 100%;
   display: flex;
@@ -24,4 +36,9 @@
 .post-list {
   flex: 1;
   overflow-y: auto;
+}
+
+.post-detail-viewer-container {
+  flex-grow: 1;
+  background-color: #fff;
 }

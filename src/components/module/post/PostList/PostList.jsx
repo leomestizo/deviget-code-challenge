@@ -2,14 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-import PostCard from "./PostCard";
+// import post from "types/post";
+
+import PostListItem from "./PostListItem";
 
 import styles from "./postList.less";
 
 const propTypes = {
   className: PropTypes.string,
   onPostClick: PropTypes.func,
-  // posts: PropTypes.arrayOf(),
+  // posts: PropTypes.arrayOf(PropTypes.shape(post)),
 };
 
 const defaultProps = {
@@ -18,8 +20,8 @@ const defaultProps = {
   // posts: [],
 };
 
-const renderPostCards = (posts, onPostClick) => posts.map((post) => (
-  <PostCard
+const renderPostListItems = (posts, onPostClick) => posts.map((post) => (
+  <PostListItem
     key={post.id}
     onClick={onPostClick}
     post={post}
@@ -35,7 +37,7 @@ const PostList = ({
 
   return (
     <div className={postListClasses}>
-      {renderPostCards(posts, onPostClick)}
+      {renderPostListItems(posts, onPostClick)}
     </div>
   );
 };

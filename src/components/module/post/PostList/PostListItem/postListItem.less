@@ -1,0 +1,31 @@
+.post-list-item {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 1px 3px -1px #ccc;
+  opacity: 1;
+  left: 0;
+  transition: opacity 0.3s ease-out, left 0.3s ease-out;
+
+  &:not(:last-child) {
+    margin-bottom: 1em;
+  }
+}
+
+.elimination-transition {
+  opacity: 0;
+  left: -110%;
+}
+
+.dismiss-button {
+  width: 100%;
+}
+
+.read-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #2f4a5e;
+  color: #fff;
+}

@@ -1,5 +1,7 @@
 import { handleActions } from "redux-actions";
 
+import { removeElementFromArray } from "utils/array";
+
 import * as actionCreators from "./actions";
 
 const defaultState = {
@@ -18,11 +20,29 @@ const handleFetchPostsResponseAction = (state, action) => ({
   postList: action.payload.postList,
 });
 
-const handleRemovePostAction = (state) => state;
+const handleRemovePostAction = (state, action) => ({
+  ...state,
+  postList: removeElementFromArray(state.postList, action.payload.id),
+});
 
-const handleRemoveAllPostsAction = (state) => state;
+const handleRemoveAllPostsAction = (state) => ({
+  ...state,
+  postList: [],
+});
 
-const handleMarkPostAsReadAction = (state) => state;
+const handleMarkPostAsReadAction = (state, action) => ({
+  ...state,
+  postList: state.postList.map((post) => {
+    if (post.id === action.payload.id) {
+      return {
+        ...post,
+        hasBeenRead: true,
+      };
+    }
+
+    return post;
+  }),
+});
 
 const reducer = handleActions(
   {

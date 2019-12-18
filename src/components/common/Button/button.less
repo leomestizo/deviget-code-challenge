@@ -1,0 +1,25 @@
+.button {
+  padding: 1.25em;
+  font: 0.875rem Lato, sans-serif;
+  border: 0;
+}
+
+.active {
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:active {
+    box-shadow: inset 0 1px 3px -1px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+}
