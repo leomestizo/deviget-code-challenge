@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "components/common/Button";
 import Loader from "components/common/Loader";
+import Paginator from "components/common/Paginator";
 
 import { isNil } from "utils/type";
 
@@ -23,19 +24,34 @@ import styles from "./postPage.less";
 
 const propTypes = {
   className: PropTypes.string,
+  postsPerPage: PropTypes.number,
 };
 
 const defaultProps = {
   className: "",
+  postsPerPage: 10,
 };
 
-const handleDismissAllButtonClick = (setSelectedPost, dispatch) => {
+const slicePosts = (currentPage, postsPerPage, posts) => {
+  const pageIndex = currentPage - 1;
+  const beginIndex = pageIndex * postsPerPage;
+  const endIndex = beginIndex + postsPerPage;
+
+  return posts.slice(beginIndex, endIndex);
+};
+
+const resetInternalState = (setSelectedPost, setCurrentPage) => {
   setSelectedPost(null);
+  setCurrentPage(1);
+};
+
+const handleDismissAllButtonClick = (setSelectedPost, setCurrentPage, dispatch) => {
+  resetInternalState(setSelectedPost, setCurrentPage);
   dispatch(removeAllPosts());
 };
 
-const handleRefreshButtonClick = (setSelectedPost, dispatch) => {
-  setSelectedPost(null);
+const handleRefreshButtonClick = (setSelectedPost, setCurrentPage, dispatch) => {
+  resetInternalState(setSelectedPost, setCurrentPage);
   dispatch(fetchPosts());
 };
 
@@ -44,11 +60,14 @@ const handlePostClick = (setSelectedPost, post, dispatch) => {
   dispatch(markPostAsRead(post.id));
 };
 
-const PostPage = ({ className }) => {
+const PostPage = ({ className, postsPerPage }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const posts = useSelector(getPosts);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const sliceOfPosts = slicePosts(currentPage, postsPerPage, posts);
 
   useEffect(() => dispatch(fetchPosts()), []);
 
@@ -63,14 +82,14 @@ const PostPage = ({ className }) => {
         <div className={styles["button-container"]}>
           <Button
             className={styles.button}
-            isDisabled={posts.length === 0}
+            isDisabled={sliceOfPosts.length === 0}
             label="Dismiss all"
-            onClick={() => handleDismissAllButtonClick(setSelectedPost, dispatch)}
+            onClick={() => handleDismissAllButtonClick(setSelectedPost, setCurrentPage, dispatch)}
           />
           <Button
             className={styles.button}
             label="Refresh"
-            onClick={() => handleRefreshButtonClick(setSelectedPost, dispatch)}
+            onClick={() => handleRefreshButtonClick(setSelectedPost, setCurrentPage, dispatch)}
           />
         </div>
         {isLoading
@@ -80,11 +99,20 @@ const PostPage = ({ className }) => {
             </div>
           )
           : (
-            <PostList
-              className={styles["post-list"]}
-              onPostClick={(post) => handlePostClick(setSelectedPost, post, dispatch)}
-              posts={posts}
-            />
+            <Fragment>
+              <PostList
+                className={styles["post-list"]}
+                onPostClick={(post) => handlePostClick(setSelectedPost, post, dispatch)}
+                posts={sliceOfPosts}
+              />
+              <Paginator
+                className={styles.paginator}
+                elementsPerPage={postsPerPage}
+                onPageChange={(page) => setCurrentPage(page)}
+                page={currentPage}
+                totalElements={posts.length}
+              />
+            </Fragment>
           )
         }
       </aside>
