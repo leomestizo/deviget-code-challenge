@@ -4,7 +4,14 @@ import classnames from "classnames";
 
 import Image from "components/common/Image";
 
+import {
+  TOP_POSTS_ROUTE,
+  PICTURE_GALLERY_ROUTE,
+} from "constants/routes";
+
 import devigetLogo from "assets/images/deviget-logo.png";
+
+import NavigationBar from "../NavigationBar";
 
 import styles from "./header.less";
 
@@ -25,6 +32,18 @@ const Header = ({ className }) => {
         alt="Deviget logo"
         className={styles.logo}
         src={devigetLogo}
+      />
+      <NavigationBar
+        navigationItems={[
+          {
+            link: TOP_POSTS_ROUTE,
+            text: "Top posts",
+          },
+          {
+            link: PICTURE_GALLERY_ROUTE,
+            text: "Picture gallery",
+          },
+        ]}
       />
     </header>
   );
