@@ -5,5 +5,16 @@
   ],
   "env": {
     "browser": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./config/webpack/base.config.js"
+      }
+    }
+  },
+  "rules": {
+    "quotes": ["error", "double"],
+    "react/jsx-fragments": "off"
   }
 }
