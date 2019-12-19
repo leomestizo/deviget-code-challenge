@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Header from "components/layout/Header";
+import PictureGallery from "components/module/picture-gallery/PictureGallery";
 import PostPage from "components/module/post/PostPage";
 
 import {
@@ -29,7 +30,7 @@ const App = () => (
             <PostPage className={styles["post-page"]} />
           </Route>
           <Route path={PICTURE_GALLERY_ROUTE}>
-            <span>Picture gallery</span>
+            <PictureGallery className={styles["picture-gallery"]} />
           </Route>
         </Switch>
       </Router>
