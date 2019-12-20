@@ -4,17 +4,16 @@ import classnames from "classnames";
 import pluralize from "pluralize";
 import { formatDistanceToNow } from "date-fns";
 
-import Icon from "components/common/Icon";
 import Image from "components/common/Image";
 
-// import post from "types/post";
+import postType from "types/post";
 
 import styles from "./postCard.less";
 
 const propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func,
-  // post: PropTypes.,
+  post: postType,
 };
 
 const defaultProps = {

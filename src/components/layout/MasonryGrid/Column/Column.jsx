@@ -5,10 +5,12 @@ import classnames from "classnames";
 import styles from "./column.less";
 
 const propTypes = {
+  children: PropTypes.node,
   className: PropTypes.string,
 };
 
 const defaultProps = {
+  children: null,
   className: "",
 };
 

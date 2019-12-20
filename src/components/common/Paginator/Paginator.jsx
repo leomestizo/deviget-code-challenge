@@ -25,7 +25,9 @@ const defaultProps = {
   page: 1,
 };
 
-const getMaximumLimit = (totalElements, elementsPerPage) => Math.ceil(totalElements / elementsPerPage);
+const getMaximumLimit = (totalElements, elementsPerPage) => Math.ceil(
+  totalElements / elementsPerPage,
+);
 
 const handleOnClick = (newPage, maximumLimit, onPageChange) => {
   if (newPage > 0 && newPage <= maximumLimit) {

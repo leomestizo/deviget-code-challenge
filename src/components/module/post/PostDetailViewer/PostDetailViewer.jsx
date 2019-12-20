@@ -12,16 +12,18 @@ import { CLOSE_ICON } from "constants/svgIcons";
 
 import { isNil } from "utils/type";
 
-// import post from "types/post";
+import postType from "types/post";
 
 import styles from "./postDetailViewer.less";
 
 const propTypes = {
   onClose: PropTypes.func,
+  selectedPost: postType,
 };
 
 const defaultProps = {
   onClose: () => {},
+  selectedPost: null,
 };
 
 const PostDetailViewer = ({
@@ -33,6 +35,7 @@ const PostDetailViewer = ({
 
   return (
     <div className={styles["post-detail-viewer"]}>
+      {/* eslint-disable react/jsx-curly-newline */}
       {isNil(selectedPost)
         ? (
           <div className={styles["no-post-selected-message-container"]}>
@@ -51,7 +54,7 @@ const PostDetailViewer = ({
               width={50}
             />
             <div className={styles["post-information-container"]}>
-              <h1>Post by {selectedPost.author}</h1>
+              <h1>{`Post by ${selectedPost.author}`}</h1>
               <Image
                 onError={() => setImageError(true)}
                 onLoad={() => setImageError(false)}
@@ -70,6 +73,7 @@ const PostDetailViewer = ({
           </div>
         )
       }
+      {/* eslint-enable react/jsx-curly-newline */}
     </div>
   );
 };

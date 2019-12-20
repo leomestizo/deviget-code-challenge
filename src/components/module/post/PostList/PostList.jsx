@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-// import post from "types/post";
+import postType from "types/post";
 
 import PostListItem from "./PostListItem";
 
@@ -11,13 +11,13 @@ import styles from "./postList.less";
 const propTypes = {
   className: PropTypes.string,
   onPostClick: PropTypes.func,
-  // posts: PropTypes.arrayOf(PropTypes.shape(post)),
+  posts: PropTypes.arrayOf(PropTypes.shape(postType)),
 };
 
 const defaultProps = {
   className: "",
   onPostClick: () => {},
-  // posts: [],
+  posts: [],
 };
 
 const renderPostListItems = (posts, onPostClick) => posts.map((post) => (

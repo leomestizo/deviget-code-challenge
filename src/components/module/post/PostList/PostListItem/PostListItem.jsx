@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 
 import Button from "components/common/Button";
 
+import postType from "types/post";
+
 import PostCard from "../../PostCard";
 
 import { removePost } from "../../actions";
@@ -13,7 +15,7 @@ import styles from "./postListItem.less";
 
 const propTypes = {
   onClick: PropTypes.func,
-  // post: PropTypes.,
+  post: postType,
 };
 
 const defaultProps = {

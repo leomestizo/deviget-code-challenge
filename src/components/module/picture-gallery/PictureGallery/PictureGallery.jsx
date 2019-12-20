@@ -37,6 +37,7 @@ const PictureGallery = ({ className }) => {
 
   return (
     <div className={pictureGalleryClasses}>
+      {/* eslint-disable react/jsx-curly-newline */}
       {pictureList.length === 0
         ? (
           <div className={styles["no-pictures-message-container"]}>
@@ -54,6 +55,7 @@ const PictureGallery = ({ className }) => {
           </MasonryGrid>
         )
       }
+      {/* eslint-enable react/jsx-curly-newline */}
     </div>
   );
 };

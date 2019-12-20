@@ -1,4 +1,9 @@
-import React, { Children, useEffect, useRef, useState } from "react";
+import React, {
+  Children,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
@@ -13,6 +18,7 @@ import styles from "./masonryGrid.less";
 const DEFAULT_NUMBER_OF_COLUMNS = 4;
 
 const propTypes = {
+  children: PropTypes.node,
   columnBreakpoints: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(
@@ -28,6 +34,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  children: null,
   columnBreakpoints: DEFAULT_NUMBER_OF_COLUMNS,
   columnClassName: "",
   gridClassName: "",
@@ -45,21 +52,23 @@ const renderGrid = (children, numberOfColumns, columnClassName, tileClassName) =
       childrenElements.push(
         <Tile key={`tile-${k}`} className={tileClassName}>
           {arrayOfChildren[k]}
-        </Tile>
+        </Tile>,
       );
     }
 
     columnElements.push(
       <Column key={`column-${i}`} className={columnClassName}>
         {childrenElements}
-      </Column>
+      </Column>,
     );
   }
 
   return columnElements;
 };
 
-const updateGridWidth = (setGridWidth, gridElement) => setGridWidth(gridElement.current.offsetWidth);
+const updateGridWidth = (setGridWidth, gridElement) => setGridWidth(
+  gridElement.current.offsetWidth,
+);
 
 const getNumberOfColumns = (columnBreakpoints, gridWidth) => {
   if (isNumber(columnBreakpoints)) {
@@ -68,7 +77,8 @@ const getNumberOfColumns = (columnBreakpoints, gridWidth) => {
 
   let numberOfColumns = null;
   columnBreakpoints.forEach((breakpoint) => {
-    // TODO: I should sort the breakpoints by `width` in descending order so that this logic always work.
+    // TODO: I should sort the breakpoints by `width` in descending order
+    // so that this logic always work.
     numberOfColumns = breakpoint.width >= gridWidth ? breakpoint.columns : numberOfColumns;
   });
 

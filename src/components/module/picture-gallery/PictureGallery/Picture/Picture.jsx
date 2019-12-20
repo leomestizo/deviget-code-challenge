@@ -5,8 +5,6 @@ import { useDispatch } from "react-redux";
 import Button from "components/common/Button";
 import Image from "components/common/Image";
 
-import { DELETE_ICON } from "constants/svgIcons";
-
 import { removePicture } from "../../actions";
 
 import styles from "./picture.less";

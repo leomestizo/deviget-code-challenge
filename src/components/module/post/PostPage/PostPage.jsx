@@ -92,6 +92,7 @@ const PostPage = ({ className, postsPerPage }) => {
             onClick={() => handleRefreshButtonClick(setSelectedPost, setCurrentPage, dispatch)}
           />
         </div>
+        {/* eslint-disable react/jsx-curly-newline */}
         {isLoading
           ? (
             <div className={styles["loader-container"]}>
@@ -115,6 +116,7 @@ const PostPage = ({ className, postsPerPage }) => {
             </Fragment>
           )
         }
+        {/* eslint-enable react/jsx-curly-newline */}
       </aside>
       <section className={detailViewerContainerClasses}>
         <PostDetailViewer
