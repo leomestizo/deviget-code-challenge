@@ -25,9 +25,20 @@ module.exports = webpackMerge(baseConfig, {
           "less-loader",
         ],
       },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              publicPath: "dist/",
+            },
+          },
+        ],
+      },
     ],
   },
-  devtool: "eval-source-map",
+  devtool: "inline-source-map",
   devServer: {
     contentBase: path.resolve(workingDirectory, "public"),
     historyApiFallback: true,
