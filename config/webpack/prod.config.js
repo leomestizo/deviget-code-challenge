@@ -2,7 +2,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlPlugin = require("html-webpack-plugin");
-const HtmlRootPlugin = require("html-webpack-root-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const webpackMerge = require("webpack-merge");
@@ -24,9 +23,7 @@ module.exports = webpackMerge(baseConfig, {
       {
         test: /\.less$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
@@ -35,17 +32,6 @@ module.exports = webpackMerge(baseConfig, {
             },
           },
           "less-loader",
-        ],
-      },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              publicPath: "/",
-            },
-          },
         ],
       },
     ],
@@ -58,9 +44,8 @@ module.exports = webpackMerge(baseConfig, {
       },
     ]),
     new HtmlPlugin({
-      title: "Deviget code challenge",
+      template: path.resolve(workingDirectory, "public", "index.html"),
     }),
-    new HtmlRootPlugin("root"),
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),

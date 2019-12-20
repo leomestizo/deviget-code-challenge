@@ -25,17 +25,6 @@ module.exports = webpackMerge(baseConfig, {
           "less-loader",
         ],
       },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              publicPath: "dist/",
-            },
-          },
-        ],
-      },
     ],
   },
   devtool: "inline-source-map",
@@ -44,6 +33,6 @@ module.exports = webpackMerge(baseConfig, {
     historyApiFallback: true,
     hot: true,
     port: 5000,
-    publicPath: "/dist/",
+    publicPath: "/",
   },
 });
