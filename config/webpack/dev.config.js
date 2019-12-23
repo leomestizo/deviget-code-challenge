@@ -1,9 +1,11 @@
+const HtmlPlugin = require("html-webpack-plugin");
 const path = require("path");
 const webpackMerge = require("webpack-merge");
 
 const baseConfig = require("./base.config");
 
 const workingDirectory = process.cwd();
+const publicPath = path.resolve(workingDirectory, "public");
 
 module.exports = webpackMerge(baseConfig, {
   mode: "development",
@@ -27,9 +29,14 @@ module.exports = webpackMerge(baseConfig, {
       },
     ],
   },
+  plugins: [
+    new HtmlPlugin({
+      template: path.resolve(publicPath, "index.html"),
+    }),
+  ],
   devtool: "inline-source-map",
   devServer: {
-    contentBase: path.resolve(workingDirectory, "public"),
+    contentBase: publicPath,
     historyApiFallback: true,
     hot: true,
     port: 5000,

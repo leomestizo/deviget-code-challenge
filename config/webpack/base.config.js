@@ -1,9 +1,10 @@
 const path = require("path");
 
 const workingDirectory = process.cwd();
+const srcPath = path.resolve(workingDirectory, "src");
 
 module.exports = {
-  context: path.resolve(workingDirectory, "src"),
+  context: srcPath,
   entry: "./index.jsx",
   output: {
     filename: "bundle.js",
@@ -30,11 +31,11 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
-      assets: path.resolve(workingDirectory, "src", "assets"),
-      components: path.resolve(workingDirectory, "src", "components"),
-      constants: path.resolve(workingDirectory, "src", "constants"),
-      types: path.resolve(workingDirectory, "src", "types"),
-      utils: path.resolve(workingDirectory, "src", "utils"),
+      assets: path.resolve(srcPath, "assets"),
+      components: path.resolve(srcPath, "components"),
+      constants: path.resolve(srcPath, "constants"),
+      types: path.resolve(srcPath, "types"),
+      utils: path.resolve(srcPath, "utils"),
     },
   },
 };
