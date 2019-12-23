@@ -8,6 +8,7 @@ import {
   Route,
 } from "react-router-dom";
 
+import Loader from "components/common/Loader";
 import Header from "components/layout/Header";
 import PictureGallery from "components/module/picture-gallery/PictureGallery";
 import PostPage from "components/module/post/PostPage";
@@ -26,7 +27,7 @@ const persistor = persistStore(store);
 
 const App = () => (
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    <PersistGate loading={<Loader />} persistor={persistor}>
       <div className={styles.app}>
         <Router>
           <Header className={styles.header} />
