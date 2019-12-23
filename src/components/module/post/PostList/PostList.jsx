@@ -11,7 +11,7 @@ import styles from "./postList.less";
 const propTypes = {
   className: PropTypes.string,
   onPostClick: PropTypes.func,
-  posts: PropTypes.arrayOf(PropTypes.shape(postType)),
+  posts: PropTypes.arrayOf(postType),
 };
 
 const defaultProps = {
